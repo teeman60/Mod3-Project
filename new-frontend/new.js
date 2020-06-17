@@ -5,8 +5,8 @@ const url = 'http://localhost:3000/users'
 const div = document.createElement('div')
 const body = document.querySelector("body")
 const canvas = document.querySelector("#bird")
-// const btn = document.createElement('button')
-// btn.innerText = "Start Game"
+
+// let currentUser1 = {"username":"", "highest_score": 124}
 
 
 const usersArray = []
@@ -21,7 +21,9 @@ fetch(url)
 
 let currentUser = ""
 
-let currentUser1 
+let player = ''
+
+// let currentUser1 
 
 
 div.innerHTML = `<form class="login-form">
@@ -80,6 +82,8 @@ const form = document.querySelector('.login-form')
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 
+    
+
     const new_user = document.querySelector('.username-input')
 
     const options = {
@@ -96,10 +100,32 @@ form.addEventListener('submit', (e) => {
     const found = usersArray.some(el => el.username === new_user.value);    
     if(!found){  
         canvas.style.display = "block"
-        // div.style.display = "none"  
-        start()
-     
+        // div.style.display = "none"
+        // debugger  
+        // let id = usersArray.last.id
+        // currentUser = {
+        //     "username":new_user.value,
+        //     "highest_score":0,
+        //     "id": id
+        // }
+
+        
         fetch(url, options)
+        .then(res=>{getuser()})
+        
+        function getuser(){
+            let currentUser1 = ''
+               fetch(url)
+                .then(res => res.json())
+                .then(users =>{
+                    console.log(users)
+                    currentUser1 = users.find(user => user.username == new_user.value)
+                    console.log(currentUser1)
+                    start(currentUser1)
+            })
+        }
+            
+        
     }
     else{
         alert("USER ALREADY EXISTS")
@@ -116,23 +142,34 @@ nameselect.addEventListener('submit', (e) => {
 
     currentUser = document.querySelector("#user-menu").value
 
-    currentUser1 = ''
+    // currentUser1 = ''
+    let currentUser1 = ''
+
 
     fetch(url)
     .then(res => res.json())
     .then(users =>{
         currentUser1 = users.find(user => user.username == currentUser)
-        // console.log(currentUser1)
+        console.log(currentUser1)
+        start(currentUser1)
     })
 
-
-    start()
+    // start()
 })
 
-function start() {
+function start(currentUser1) {
 
-    localStorage.setItem("best", 0);
+    player = currentUser1
+
+    console.log(currentUser1)
+    score.best = currentUser1.highest_score
+
+    console.log(score.best)
+
+    localStorage.setItem("best", score.best)
     
+    console.log(parseInt(localStorage.getItem("best")))
+
     loop();
 
 }

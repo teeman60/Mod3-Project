@@ -9,7 +9,9 @@
 
 // const found = array1.find(element => element > 10);
 
+// let currentUser1 = {"username":"", "highest_score": 123}
 
+ 
 // SELECT CVS
 const cvs = document.getElementById("bird");
 const ctx = cvs.getContext("2d");
@@ -301,8 +303,10 @@ const pipes = {
                 this.position.shift();
                 score.value += 1;
                 SCORE_S.play();
-
-                score.best = Math.max(score.value, score.best, currentUser1.highest_score);
+                score.best = Math.max(score.value, score.best);
+                if (score.best > player.highest_score){
+                    updateScore(score.best)
+                }
                 localStorage.setItem("best", score.best);
             }
         }
@@ -316,7 +320,7 @@ const pipes = {
 
 // SCORE
 const score= {
-    best : parseInt(localStorage.getItem("best")) || 0,
+    best : 0 || parseInt(localStorage.getItem("best")),
     value : 0,
     
     draw : function(){
@@ -346,6 +350,26 @@ const score= {
     reset : function(){
         this.value = 0;
     }
+}
+
+function updateScore(score){
+
+    const updatedScore = score
+    options = {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            highest_score: updatedScore,
+            game: "flappy"
+        })
+    }
+
+fetch(`http://localhost:3000/users/${player.id}`, options)
+    
+
 }
 
 // DRAW
