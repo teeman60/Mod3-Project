@@ -10,13 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_16_160311) do
+ActiveRecord::Schema.define(version: 2020_06_17_214355) do
+
+  create_table "scores", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "game"
+    t.integer "high_score"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_scores_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
-    t.string "highest_score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "scores", "users"
 end
