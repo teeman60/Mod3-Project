@@ -8,6 +8,17 @@ const canvas = document.querySelector("#bird")
 // const btn = document.createElement('button')
 // btn.innerText = "Start Game"
 
+
+const usersArray = []
+
+fetch(url)
+    .then(res => res.json())
+    .then(users =>{
+        for(const user of users){
+            usersArray.push(user)
+        }
+    })
+
 let currentUser = ""
 
 let currentUser1 
@@ -18,7 +29,7 @@ div.innerHTML = `<form class="login-form">
                     class="username-input"
                     type="text"
                     name="username"
-                    placeholder="Username"
+                    placeholder="Username" required
                     />
                     <button class="login-button" type="submit">submit</button>
                 </form>
@@ -69,13 +80,6 @@ const form = document.querySelector('.login-form')
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    canvas.style.display = "block"
-
-    // div.style.display = "none"
-    
-    
-    start()
-
     const new_user = document.querySelector('.username-input')
 
     const options = {
@@ -88,8 +92,18 @@ form.addEventListener('submit', (e) => {
             username: new_user.value
         }) 
     }
-        
-    fetch(url, options)
+
+    const found = usersArray.some(el => el.username === new_user.value);    
+    if(!found){  
+        canvas.style.display = "block"
+        // div.style.display = "none"  
+        start()
+     
+        fetch(url, options)
+    }
+    else{
+        alert("USER ALREADY EXISTS")
+    }
    
 })
 
@@ -102,6 +116,7 @@ nameselect.addEventListener('submit', (e) => {
 
     currentUser = document.querySelector("#user-menu").value
 
+    currentUser1 = ''
 
     fetch(url)
     .then(res => res.json())
@@ -115,6 +130,8 @@ nameselect.addEventListener('submit', (e) => {
 })
 
 function start() {
+
+    localStorage.setItem("best", 0);
     
     loop();
 
