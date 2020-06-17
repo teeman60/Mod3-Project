@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: monospace;
+  font-family: Verdana;
 }
 
 #game-header {
@@ -25,8 +25,8 @@ body {
   text-align: center;
   border: grey solid 1px;
   padding: 1rem;
-  width: 15rem;
-  height: 25rem;
+  width: 10rem;
+  height: 18rem;
   display: inline-grid;
   margin: 1rem 2rem;
   box-shadow: 3px 4px #e04b52
@@ -34,16 +34,16 @@ body {
 
 .game-avatar {
   justify-self: center;
-  height: 12rem;
-  width: auto;
+  height: 10rem;
+  width: 10rem;
 }
 
 button {
   position: relative;
-  background-color: #e04b52;
+  background-color: #dd13e8;
   border: none;
   border-radius: 5px;
-  height: 3rem;
+  height: 2rem;
   width: max-content;
   color: whitesmoke;
   font-size: 18px;
@@ -71,7 +71,7 @@ button:hover {
 
 .submit {
   position: relative;
-  background-color: #e04b52;
+  background-color: #31b017;
   border-radius: 5px;
   height: 2rem;
   width: max-content;
@@ -84,12 +84,12 @@ button:hover {
 
 .submit:hover {
   background-color: whitesmoke;
-  border: #e04b52 solid 1px;
-  color: #e04b52;
+  border: #d82623 solid 1px;
+  color: #c72216;
 }
 
 
-.input-text {
+.username-input {
   border-radius: 5px;
   height: 2rem;
   width: 60%;
