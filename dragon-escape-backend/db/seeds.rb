@@ -8,10 +8,28 @@
 
 
 User.destroy_all
+Score.destroy_all
 
-User.create(username: 'tee', highest_score: 5)
-User.create(username: 'freddy', highest_score: 150)
-User.create(username: 'don', highest_score: 20)
-User.create(username: 'tracy', highest_score: 16)
-User.create(username: 'paul', highest_score: 9)
+
+u1 = User.create(username: 'tee')
+u2 = User.create(username: 'freddy')
+u3 = User.create(username: 'don')
+
+
+Score.create(user_id: u1.id, game: "Tetris", high_score: 21)
+Score.create(user_id: u2.id, game: "Tetris", high_score: 0)
+Score.create(user_id: u3.id, game: "Tetris", high_score: 7)
+
+Score.create(user_id: u1.id, game: "Flappy Bird", high_score: 17)
+Score.create(user_id: u2.id, game: "Flappy Bird", high_score: 1)
+Score.create(user_id: u3.id, game: "Flappy Bird", high_score: 7)
+
+Score.create(user_id: u1.id, game: "Ping-Pong", high_score: 10)
+Score.create(user_id: u2.id, game: "Ping-Pong", high_score: 0)
+Score.create(user_id: u3.id, game: "Ping-Pong", high_score: 15)
+
+Score.create(user_id: u1.id, game: "Mountain Runner", high_score: 40)
+Score.create(user_id: u2.id, game: "Mountain Runner", high_score: 8)
+Score.create(user_id: u3.id, game: "Mountain Runner", high_score: 6)
+
 
