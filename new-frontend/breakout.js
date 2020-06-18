@@ -358,6 +358,7 @@ function newLevel() {
 function outOfBounds() {
     lives--;
     if (lives == 0) {
+        newScore(localStorage.getItem(KEY_SCORE))
         gameOver = true;
     }
     newBall();
@@ -622,7 +623,7 @@ function updateScore(brickScore) {
     // check for a high score
     if (score > scoreHigh) {
         scoreHigh = score;
-        newScore(scoreHigh)
+        // newScore(scoreHigh)
         localStorage.setItem(KEY_SCORE, scoreHigh);
     }
 }
