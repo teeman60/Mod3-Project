@@ -6,9 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Score.destroy_all
 
 User.destroy_all
-Score.destroy_all
 
 
 u1 = User.create(username: 'tee')
@@ -27,9 +27,5 @@ Score.create(user_id: u3.id, game: "Flappy Bird", high_score: 7)
 Score.create(user_id: u1.id, game: "Ping-Pong", high_score: 10)
 Score.create(user_id: u2.id, game: "Ping-Pong", high_score: 0)
 Score.create(user_id: u3.id, game: "Ping-Pong", high_score: 15)
-
-Score.create(user_id: u1.id, game: "Mountain Runner", high_score: 40)
-Score.create(user_id: u2.id, game: "Mountain Runner", high_score: 8)
-Score.create(user_id: u3.id, game: "Mountain Runner", high_score: 6)
 
 
