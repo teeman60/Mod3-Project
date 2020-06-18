@@ -105,7 +105,7 @@ pingimage.src = 'img/ping.jpg'
 ping.append(pingh2, pingimage)
 // body.append(ping)
 
-menuDiv.append(flappy, tetris, mountain, ping)
+menuDiv.append(flappy, tetris, ping)
 menuDiv.style.display = 'none'
 body.append(menuDiv)
 
@@ -304,7 +304,7 @@ function startFlappy(currentUser1) {
     
     console.log(parseInt(localStorage.getItem("best")))
 
-    loop();
+    flappyloop();
 
 }
 
@@ -328,8 +328,10 @@ function startTetris(currentUser1) {
     section.style.display = 'none'
     menuDiv.style.display = 'none'
     canvas.style.display = 'none'
-    tetriscanvas.style.display = 'block'
+    tcanvas.style.display = 'block'
     tscore.style.display = 'block'
+
+    
 
 
     player1 = currentUser1

@@ -382,7 +382,7 @@ function update(){
 }
 
 // LOOP
-function loop(){
+function flappyloop(){
 
     // console.log(currentUser1)
     
@@ -391,7 +391,7 @@ function loop(){
     draw();
     frames++;
     
-    requestAnimationFrame(loop);
+    requestAnimationFrame(flappyloop);
 }
 // loop();
 

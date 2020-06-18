@@ -1,3 +1,5 @@
+function playTetris(){
+
 const tetriscanvas = document.getElementById('tetris');
 const context = tetriscanvas.getContext('2d');
 
@@ -208,8 +210,33 @@ function update(time = 0) {
 }
 
 function updateScore() {
-    document.getElementById('score').innerText = player.score;
+    if(player.score > tetrisScore.high_score){
+        updateTetrisScore(player.score)
+    }
+    document.getElementById('score').innerText = `Score: ${player.score}     High Score: ${tetrisScore.high_score}`;
 }
+
+function updateTetrisScore(score){
+
+    const updatedScore = score
+    options = {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            high_score: updatedScore
+        })
+    }
+
+    fetch(`http://localhost:3000/scores/${tetrisScore.id}`, options)
+
+
+
+
+}
+
 
 document.addEventListener('keydown', event => {
     if (event.keyCode === 37) {
@@ -246,8 +273,9 @@ const player = {
     score: 0,
 };
 
-function playTetris(){
+
     playerReset();
     updateScore();
     update();
+
 }
