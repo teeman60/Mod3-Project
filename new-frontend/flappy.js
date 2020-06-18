@@ -355,8 +355,8 @@ function updateScore(score){
         })
     }
 
+   
     fetch(`http://localhost:3000/scores/${flappyScore.id}`, options)
-    
 
 }
 
