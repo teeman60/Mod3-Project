@@ -1,17 +1,3 @@
-// FETCH USERS
-// let currentUser1 
-// fetch(url)
-//     .then(res => res.json())
-//     .then(users =>{
-//         currentUser1 = users.find(user => user.username == currentUser)
-//         console.log(currentUser1)
-//     })
-
-// const found = array1.find(element => element > 10);
-
-// let currentUser1 = {"username":"", "highest_score": 123}
-
- 
 // SELECT CVS
 const cvs = document.getElementById("bird");
 const ctx = cvs.getContext("2d");
@@ -362,12 +348,12 @@ function updateScore(score){
             'Accept': 'application/json'
         },
         body: JSON.stringify({
-            highest_score: updatedScore,
+            high_score: updatedScore,
             game: "flappy"
         })
     }
 
-fetch(`http://localhost:3000/users/${player.id}`, options)
+fetch(`http://localhost:3000/scores/${score.id}`, options)
     
 
 }

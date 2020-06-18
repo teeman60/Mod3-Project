@@ -32,6 +32,7 @@ body.append(section)
 
 
 const menuDiv = document.createElement('div')
+menuDiv.style.border = 'none'
 
 // FLAPPY BIRD CARD
 const flappy = document.createElement('nav')
@@ -43,7 +44,7 @@ flappyh2.innerText = 'Flappy Bird'
 
 const flappyimage = document.createElement('img')
 flappyimage.setAttribute('class', 'game-avatar')
-flappyimage.src = 'img/new_flappypng.png'
+flappyimage.src = 'img/new_flappy.jpg'
 
 // flappyimage.classList.add('.game-avatar')
 flappy.append(flappyh2, flappyimage)
@@ -119,9 +120,8 @@ div.innerHTML = `<form class="login-form">
                     <label for="users">Select User:</label>
                     <select id="user-menu" name="user">              
                     </select>
-                    button class="proceed-button" type="submit">Enter Game Mode</button>
-                </form>
-                
+                    <button class="proceed-button" type="submit">Enter Game Mode</button>
+                </form>                
                 `
 
 body.append(div)
@@ -221,23 +221,28 @@ let selectedCard = ""
 menuDiv.addEventListener('click', (e) => {
     e.preventDefault()
     
-    if (e.target == ''){ //if target == nav element
+    if (e.target.isEqualNode('nav'))
+        {
 
         //then make selectedCard = nav.id
-        selectedCard = ''   
+        selectedCard = e.target.id   
     }
 })
 
 function selectGame(currentUser){
-    if (selectedCard = "flappy-game"){
+
+    console.log(currentUser)
+
+    if (selectedCard === "flappy-game"){
         startFlappy(currentUser)
     }
-    else{
+    else if(selectedCard === "mountain-game") {
+        startMountain(currentUser)
+    } else {
         selectGame(currentUser)
     }
-    
-
 }
+
 function startFlappy(currentUser1) {
 
     player = currentUser1
@@ -251,5 +256,21 @@ function startFlappy(currentUser1) {
     console.log(parseInt(localStorage.getItem("best")))
 
     loop();
+
+}
+
+function startMountain(currentUser1) {
+
+    // player = currentUser1
+
+    // // score.best = currentUser1.scores.find_by('game':"flappyBird")
+
+    // console.log(score.best)
+
+    // localStorage.setItem("best", score.best)
+    
+    // console.log(parseInt(localStorage.getItem("best")))
+
+    // loop();
 
 }

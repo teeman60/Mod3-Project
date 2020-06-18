@@ -8,8 +8,10 @@ class UsersController < ApplicationController
     def create
         user = User.new(username: params[:username])
         user.save
-
-        
+        Score.create(user_id: user.id, game:"Tetris",high_score: 0)
+        Score.create(user_id: user.id, game:"Flappy Bird",high_score: 0)
+        Score.create(user_id: user.id, game:"Ping-Pong",high_score: 0)
+        Score.create(user_id: user.id, game:"Mountain Runner",high_score: 0)
 
     end
 
