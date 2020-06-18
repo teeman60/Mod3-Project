@@ -22,4 +22,11 @@ class UsersController < ApplicationController
         # user.save
     end
 
+    def destroy
+        # byebug
+        user = User.all.find(params[:id])
+        user.scores.destroy_all
+        user.destroy
+    end
+
 end

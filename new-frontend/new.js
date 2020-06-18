@@ -7,6 +7,13 @@ const canvas = document.querySelector("#bird")
 const usersArray = []
 const scoresUrl = 'http://localhost:3000/scores'
 
+
+const tcanvas = document.getElementById('tetris');
+const tscore = document.getElementById('score')
+tscore.style.display = 'none'
+
+
+
 fetch(url)
     .then(res => res.json())
     .then(users =>{
@@ -16,7 +23,7 @@ fetch(url)
     })
 
 let currentUser = ""
-let player = ''
+let player1 = ''
 
 
 // HEADER
@@ -121,9 +128,11 @@ div.innerHTML = `<form class="login-form">
                     <select id="user-menu" name="user">              
                     </select>
                     <button class="proceed-button" type="submit">Enter Game Mode</button>
-                </form>                
+                </form>   
+                <button class="delete-button" type="click"> Delete User</button>            
                 `
 
+                
 body.append(div)
 
 addList()
@@ -139,6 +148,7 @@ function addList(){
             const option = document.createElement("option")
             option.value = user.username
             option.innerText = user.username
+            option.id = user.username
             select.append(option)
         }
     })
@@ -192,6 +202,34 @@ inputform.addEventListener('submit', (e) => {
 })
 
 
+const removeUser = document.querySelector('.delete-button')
+removeUser.addEventListener('click', () => {
+    
+        options = {
+            method: 'DELETE'
+        }
+    
+    const selectedUser = document.querySelector('#user-menu').value
+    const userSearch = usersArray.find(el => el.username === selectedUser);  
+    const selectedUserId = userSearch.id  
+
+    const optionElement = document.getElementById(selectedUser)
+    // debugger
+
+    fetch(`${url}/${selectedUserId}`, options)
+        .then(optionElement.remove())
+        // .then(res => res.json())
+        // .then(user => {           
+        //     user.remove() 
+        // }) 
+    
+
+})
+    
+    
+
+
+
 const nameselect = document.querySelector('.user-select')
 nameselect.addEventListener('submit', (e) => {
     e.preventDefault()
@@ -240,8 +278,8 @@ function selectGame(currentUser){
     if (selectedCard === "flappy-game"){
         startFlappy(currentUser)
     }
-    else if(selectedCard === "mountain-game") {
-        startMountain(currentUser)
+    else if(selectedCard === "tetris-game") {
+        startTetris(currentUser)
     } 
     else if(selectedCard === 'ping-game'){
         startBreakout(currentUser)
@@ -254,7 +292,7 @@ function startFlappy(currentUser1) {
     menuDiv.style.display = 'none'
     canvas.style.display = 'block'
 
-    player = currentUser1
+    player1 = currentUser1
     
     flappyScore = currentUser1.scores.find(score => score.game == "Flappy Bird")
 
@@ -275,7 +313,7 @@ function startBreakout(currentUser1){
     menuDiv.style.display = 'none'
     canvas.style.display = 'none'
 
-    player = currentUser1
+    player1 = currentUser1
     
     breakScore = currentUser1.scores.find(score => score.game == "Ping-Pong")
 
@@ -285,11 +323,18 @@ function startBreakout(currentUser1){
 
 }
 
-function startMountain(currentUser1) {
+function startTetris(currentUser1) {
 
-    // player = currentUser1
+    section.style.display = 'none'
+    menuDiv.style.display = 'none'
+    canvas.style.display = 'none'
+    tetriscanvas.style.display = 'block'
+    tscore.style.display = 'block'
 
-    // // score.best = currentUser1.scores.find_by('game':"flappyBird")
+
+    player1 = currentUser1
+
+    tetrisScore = currentUser1.scores.find(score => score.game == "Tetris")
 
     // console.log(score.best)
 
@@ -297,6 +342,6 @@ function startMountain(currentUser1) {
     
     // console.log(parseInt(localStorage.getItem("best")))
 
-    // loop();
+    playTetris()
 
 }

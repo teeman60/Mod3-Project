@@ -2,11 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Original Flappy Bird -JavaScript</title>
+    <title>Arcade</title>
     <link href="https://fonts.googleapis.com/css?family=Teko:700" rel="stylesheet">
     <link rel="stylesheet" href="new.css" />
 
-    <style>        
+    <style>  
+        body{
+        background: #202028;
+        color: #fff;
+        font-family: sans-serif;
+        font-size: 1em;
+        text-align: center;
+        }      
         canvas{
             border: 1px solid #000;
             display: block;
@@ -16,17 +23,24 @@
             border: 1px solid #000;
             display: block;
             margin: 0 auto;
-            width: 1200px;
+            width: 600px;
             height: 400px;
+        }
+        #tetris{
+        border: solid .2em #fff;
+        height: 90vh;
         }
     </style>
 </head>
 <body>
+    <div id="score" style="display:none; border:none; font-size: 2em; width: 0em; height: 37px;"></div>
     <canvas id="bird" width="320" height="480" style="display:none"></canvas>
+    <canvas id="tetris" width="240" height="400" style="display:none"></canvas>
 
     <script src="new.js"></script>
     <script src="flappy.js"></script>
     <script src="breakout.js"></script>
+    <script src="tetris.js"></script>
 </body>
 </html>
  
