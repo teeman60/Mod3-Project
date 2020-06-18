@@ -290,7 +290,7 @@ const pipes = {
                 score.value += 1;
                 SCORE_S.play();
                 score.best = Math.max(score.value, score.best);
-                if (score.best > player.highest_score){
+                if (score.best > flappyScore.high_score){
                     updateScore(score.best)
                 }
                 localStorage.setItem("best", score.best);
@@ -348,12 +348,11 @@ function updateScore(score){
             'Accept': 'application/json'
         },
         body: JSON.stringify({
-            high_score: updatedScore,
-            game: "flappy"
+            high_score: updatedScore
         })
     }
 
-fetch(`http://localhost:3000/scores/${score.id}`, options)
+    fetch(`http://localhost:3000/scores/${flappyScore.id}`, options)
     
 
 }
