@@ -243,9 +243,10 @@ function selectGame(currentUser){
     else if(selectedCard === "mountain-game") {
         startMountain(currentUser)
     } 
-    // else {
-    //     selectGame(currentUser)
-    // }
+    else if(selectedCard === 'ping-game'){
+        startBreakout(currentUser)
+    }
+    
 }
 
 function startFlappy(currentUser1) {
@@ -266,6 +267,21 @@ function startFlappy(currentUser1) {
     console.log(parseInt(localStorage.getItem("best")))
 
     loop();
+
+}
+
+function startBreakout(currentUser1){
+
+    menuDiv.style.display = 'none'
+    canvas.style.display = 'none'
+
+    player = currentUser1
+    
+    breakScore = currentUser1.scores.find(score => score.game == "Ping-Pong")
+
+
+
+    breakStart(breakScore.high_score)
 
 }
 

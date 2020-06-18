@@ -168,6 +168,7 @@ const bird = {
                 this.y = cvs.height - fg.h - this.h/2;
                 if(state.current == state.game){
                     state.current = state.over;
+                    updateScore(score.best)
                     DIE.play();
                 }
             }
@@ -273,11 +274,13 @@ const pipes = {
             // TOP PIPE
             if(bird.x + bird.radius > p.x && bird.x - bird.radius < p.x + this.w && bird.y + bird.radius > p.y && bird.y - bird.radius < p.y + this.h){
                 state.current = state.over;
+                updateScore(score.best)
                 HIT.play();
             }
             // BOTTOM PIPE
             if(bird.x + bird.radius > p.x && bird.x - bird.radius < p.x + this.w && bird.y + bird.radius > bottomPipeYPos && bird.y - bird.radius < bottomPipeYPos + this.h){
                 state.current = state.over;
+                updateScore(score.best)
                 HIT.play();
             }
             
@@ -290,9 +293,9 @@ const pipes = {
                 score.value += 1;
                 SCORE_S.play();
                 score.best = Math.max(score.value, score.best);
-                if (score.best > flappyScore.high_score){
-                    updateScore(score.best)
-                }
+                // if (score.best > flappyScore.high_score){
+                    // updateScore(score.best)
+                // }
                 localStorage.setItem("best", score.best);
             }
         }
