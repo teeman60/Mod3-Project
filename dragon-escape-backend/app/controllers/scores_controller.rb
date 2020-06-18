@@ -5,6 +5,10 @@ class ScoresController < ApplicationController
     end
 
     def update
+
+        score = Score.all.find(params[:id])
+        score.high_score = params[:high_score]
+        score.save
         # byebug
         # user = User.all.find(params[:id])
         # user.highest_score = params[:highest_score]

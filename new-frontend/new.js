@@ -167,21 +167,21 @@ inputform.addEventListener('submit', (e) => {
     if(!found){  
         // canvas.style.display = "block" 
         div.style.display = 'none'
-        menuDiv.style.display = 'block'
 
 
         fetch(url, options)
-        .then(res=>{getuser()})
+            .then(res=>{getuser()})
         
         function getuser(){
-            let currentUser1 = ''
+            currentUser1 = ''
                fetch(url)
                 .then(res => res.json())
                 .then(users =>{
                     console.log(users)
                     currentUser1 = users.find(user => user.username == new_user.value)
                     console.log(currentUser1)
-                    selectGame(currentUser1)
+                    menuDiv.style.display = 'block'
+                    // selectGame(currentUser1)
             })
         }       
     }
@@ -197,18 +197,19 @@ nameselect.addEventListener('submit', (e) => {
     e.preventDefault()
     // canvas.style.display = 'block'
     div.style.display = 'none'
-    menuDiv.style.display = 'block'
+    
 
 
     currentUser = document.querySelector("#user-menu").value
 
-    let currentUser1 = ''
+    currentUser1 = ''
     fetch(url)
     .then(res => res.json())
     .then(users =>{
         currentUser1 = users.find(user => user.username == currentUser)
         console.log(currentUser1)
-        selectGame(currentUser1)
+        menuDiv.style.display = 'block'
+        // selectGame(currentUser1)
     })
 
 })
@@ -221,33 +222,42 @@ let selectedCard = ""
 menuDiv.addEventListener('click', (e) => {
     e.preventDefault()
     
-    if (e.target.isEqualNode('nav'))
+    if (e.target.nodeName == 'NAV')
         {
-
         //then make selectedCard = nav.id
-        selectedCard = e.target.id   
+        selectedCard = e.target.id 
+        selectGame(currentUser1)  
+    }
+    else if(e.target.parentNode.nodeName == "NAV"){
+        selectedCard = e.target.parentNode.id
+        selectGame(currentUser1)
     }
 })
 
 function selectGame(currentUser){
 
-    console.log(currentUser)
 
     if (selectedCard === "flappy-game"){
         startFlappy(currentUser)
     }
     else if(selectedCard === "mountain-game") {
         startMountain(currentUser)
-    } else {
-        selectGame(currentUser)
-    }
+    } 
+    // else {
+    //     selectGame(currentUser)
+    // }
 }
 
 function startFlappy(currentUser1) {
 
-    player = currentUser1
+    menuDiv.style.display = 'none'
+    canvas.style.display = 'block'
 
-    // score.best = currentUser1.scores.find_by('game':"flappyBird")
+    player = currentUser1
+    
+    flappyScore = currentUser1.scores.find(score => score.game == "Flappy Bird")
+
+    score.best = flappyScore.high_score
 
     console.log(score.best)
 
