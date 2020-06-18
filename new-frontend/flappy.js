@@ -1,17 +1,3 @@
-// FETCH USERS
-// let currentUser1 
-// fetch(url)
-//     .then(res => res.json())
-//     .then(users =>{
-//         currentUser1 = users.find(user => user.username == currentUser)
-//         console.log(currentUser1)
-//     })
-
-// const found = array1.find(element => element > 10);
-
-// let currentUser1 = {"username":"", "highest_score": 123}
-
- 
 // SELECT CVS
 const cvs = document.getElementById("bird");
 const ctx = cvs.getContext("2d");
@@ -182,6 +168,7 @@ const bird = {
                 this.y = cvs.height - fg.h - this.h/2;
                 if(state.current == state.game){
                     state.current = state.over;
+                    updateScore(score.best)
                     DIE.play();
                 }
             }
@@ -287,11 +274,13 @@ const pipes = {
             // TOP PIPE
             if(bird.x + bird.radius > p.x && bird.x - bird.radius < p.x + this.w && bird.y + bird.radius > p.y && bird.y - bird.radius < p.y + this.h){
                 state.current = state.over;
+                updateScore(score.best)
                 HIT.play();
             }
             // BOTTOM PIPE
             if(bird.x + bird.radius > p.x && bird.x - bird.radius < p.x + this.w && bird.y + bird.radius > bottomPipeYPos && bird.y - bird.radius < bottomPipeYPos + this.h){
                 state.current = state.over;
+                updateScore(score.best)
                 HIT.play();
             }
             
@@ -304,9 +293,9 @@ const pipes = {
                 score.value += 1;
                 SCORE_S.play();
                 score.best = Math.max(score.value, score.best);
-                if (score.best > player.highest_score){
-                    updateScore(score.best)
-                }
+                // if (score.best > flappyScore.high_score){
+                    // updateScore(score.best)
+                // }
                 localStorage.setItem("best", score.best);
             }
         }
@@ -362,12 +351,11 @@ function updateScore(score){
             'Accept': 'application/json'
         },
         body: JSON.stringify({
-            highest_score: updatedScore,
-            game: "flappy"
+            high_score: updatedScore
         })
     }
 
-fetch(`http://localhost:3000/users/${player.id}`, options)
+    fetch(`http://localhost:3000/scores/${flappyScore.id}`, options)
     
 
 }
