@@ -31,7 +31,8 @@ const head = document.querySelector('head')
 const section = document.createElement('section')
 section.setAttribute('id', 'game-header')
 const img = document.createElement('img')
-img.src = 'http://www.canadianshakespeares.ca/images/speareLogoFinal.jpg'
+// img.src = 'http://www.canadianshakespeares.ca/images/speareLogoFinal.jpg'
+img.src ="img/arcade banner.jpg"
 section.append(img)
 body.append(section)
 
@@ -96,11 +97,11 @@ ping.setAttribute('id', 'ping-game')
 ping.setAttribute('class', 'card')
 
 const pingh2 = document.createElement('h2')
-pingh2.innerText = 'Ping-Pong'
+pingh2.innerText = 'Breakout'
 
 const pingimage = document.createElement('img')
 pingimage.setAttribute('class', 'game-avatar')
-pingimage.src = 'img/ping.jpg'
+pingimage.src = 'img/breakout.jpg'
 
 ping.append(pingh2, pingimage)
 // body.append(ping)
